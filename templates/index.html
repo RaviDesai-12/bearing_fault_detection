@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bearing Fault Detection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body{background-color: rgb(236, 236, 8);}
+        h1{
+            color: whitesmoke; background-color: orangered;text-align: center; padding: 12px 0px 12px 0px; 
+        }
+        h2{
+            font-family: 'Heebo', sans-serif; text-align: center; 
+        }
+        label{
+            font-family: 'Archivo', sans-serif; text-align: center; padding-bottom: 20px ; max-width: 60%;
+        }
+        textarea{width: 60%;}
+        button{
+        background-color: tomato;
+        color: white;
+        border: none;
+        padding: 14px 22px 14px 22px;
+        text-decoration: none;
+        cursor: pointer;
+        }
+        p{
+            font-size: 20px; font-family: 'Heebo', sans-serif; text-align: center;
+        }
+        .centre{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .responsive {
+            width: 100%;
+            height: auto;
+        }
+        .styled-table {
+            border-collapse: collapse;
+            font-family: 'Heebo', sans-serif;
+        }
+        .styled-table thead tr {
+            background-color: red;
+            color: white;
+            text-align: center;
+        }
+        .styled-table th, .styled-table td {
+            text-align: center; padding-left: 2px; padding-right: 2px; 
+        }
+        .styled-table tbody tr {
+            border-bottom: 1px solid; background-color: white;
+        }
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1 class="responsive">Bearing Fault Detection</h1>
+    </div>
+    <img src="https://www.emersonbearing.com/wp-content/themes/emerson-default/img/bearings-group.png" alt="Bearing Image" class=" centre" style="max-width:100%">
+    <div class="centre">
+        <h2>Predict the type of fault in your bearing</h2>
+    </div>    
+    <div class="responsive">
+        <form action="/predict"  method="POST">
+        <label for="input" class="centre">
+            Enter the accelerometer data:
+        </label>
+        <textarea name="dataset" id="dataset" cols="30" rows="10" placeholder="Input real numbers with spaces" class="centre">{{dataset}}</textarea>
+    
+        <br>
+        <button class="centre">Predict</button>
+        </form>
+    </div>
+    <br><br>
+    <p>Model Parameters</p>
+    <div style="overflow-x:auto;">
+        <table class="styled-table responsive" >          
+            <thead>
+                <tr>
+                    <th>Max</th>
+                    <th>Min</th>
+                    <th>Mean</th>
+                    <th>RMS</th>
+                    <th>Kurtosis</th>
+                    <th>Crest Factor</th>
+                    <th>Form Factor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{max}}</td><td>{{min}}</td><td>{{mean}}</td><td>{{rms}}</td><td>{{kurtosis}}</td><td>{{crest}}</td><td>{{form}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><b>{{prediction_text}}</b></p>
+</body>
+</html>
